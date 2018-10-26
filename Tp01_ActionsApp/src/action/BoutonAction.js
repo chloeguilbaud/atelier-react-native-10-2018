@@ -1,5 +1,6 @@
 import React from 'react'
 import {StyleSheet, Text, TouchableHighlight} from 'react-native'
+import BoutonLabs from "./BoutonLabs";
 
 /**
  * Le composant BoutonAction est paramétrable via son nom.
@@ -18,7 +19,7 @@ const BoutonAction = ({nom, type, done, onClick}) => (
         underlayColor='#efefef'
         style={styles.bouton}
         onPress={onClick}>
-        <Text style={[styles.texte, (nom === "Terminer" && done)? styles.termine : styles[type]]}>
+        <Text style={[styles.texte, (nom === BoutonLabs.BOUTON_LABEL_TERMINER && done)? styles.termine : styles[type]]}>
             {nom}
         </Text>
     </TouchableHighlight>

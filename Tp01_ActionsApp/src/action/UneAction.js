@@ -1,6 +1,7 @@
 import React from 'react'
 import { View, Text, StyleSheet } from 'react-native'
 import BoutonAction from './BoutonAction'
+import BoutonLabs from "./BoutonLabs";
 
 /**
  * Composant représentant une action.
@@ -14,8 +15,8 @@ const UneAction = ({title, done, onTerminer, onSupprimer}) => (
             {title}
         </Text>
         <View style={styles.boutons}>
-            <BoutonAction nom="Terminer" type="non_termine" done={done} onClick={onTerminer}/>
-            <BoutonAction nom="Supprimer" type="supprimer" onClick={onSupprimer}/>
+            <BoutonAction nom={BoutonLabs.BOUTON_LABEL_TERMINER} type={BoutonLabs.BOUTON_TYPE_NON_TERMINE} done={done} onClick={onTerminer}/>
+            <BoutonAction nom={BoutonLabs.BOUTON_LABEL_SUPPRIMER} type={BoutonLabs.BOUTON_TYPE_SUPPRIMER} onClick={onSupprimer}/>
         </View>
     </View>
 )
