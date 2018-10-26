@@ -11,11 +11,16 @@ import Menu from './src/menu/Menu'
  */
 export default class App extends React.Component {
 
+    static ETAT_MENU_TOUTES = "Toutes";
+    static ETAT_MENU_ACTIVES = "Actives";
+    static ETAT_MENU_TERMINEE = "Terminees";
+
     // état global de l'application
     // il y aura probalement d'autres informations à stocker
     state = {
         texteSaisie: '',
-        actions: []
+        actions: [],
+        afficher: App.ETAT_MENU_TOUTES
     }
 
     /**
@@ -71,6 +76,30 @@ export default class App extends React.Component {
         }))
     }
 
+    /**
+     * Mettre a jour le filtre de l'application
+     * @param menuState etat du menu
+     */
+    updateFiltre(menuState) {
+        console.log("Update filtre");
+        this.setState({afficher: menuState});
+    }
+
+    /**
+     * Filtre les actions selon le filtre courant
+     *
+     * @param menuState etat du menu
+     */
+    filtrerActions(menuState) {
+        if (App.ETAT_MENU_TOUTES === menuState) {
+            return this.state.actions
+        } else if (App.ETAT_MENU_ACTIVES === menuState) {
+            return this.state.actions.filter(action => action.done === false)
+        } else {
+            return this.state.actions.filter(action => action.done === true)
+        }
+    }
+
     render() {
         const {texteSaisie, actions} = this.state
 
@@ -79,12 +108,15 @@ export default class App extends React.Component {
                 <ScrollView keyboardShouldPersistTaps='always' style={styles.content}>
                     <Entete/>
                     <Saisie texteSaisie={texteSaisie} evtTexteModifie={(titre) => this.quandLaSaisieChange(titre)}/>
-                    <ListeActions liste={actions}
+                    <ListeActions liste={this.filtrerActions(this.state.afficher)}
                                   onTerminer={(index) => this.terminerAction(index)}
                                   onSupprimer={(index) => this.supprimerAction(index)}/>
                     <BoutonCreer onValider={() => this.validerNouvelleAction(texteSaisie)}/>
                 </ScrollView>
-                <Menu/>
+                <Menu onAfficherToutes={() => this.updateFiltre(App.ETAT_MENU_TOUTES)}
+                      onAfficherActives={() => this.updateFiltre(App.ETAT_MENU_ACTIVES)}
+                      onAfficherTerminees={() => this.updateFiltre(App.ETAT_MENU_TERMINEE)}
+                />
             </View>
         )
     }
