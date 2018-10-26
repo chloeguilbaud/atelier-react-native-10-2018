@@ -24,6 +24,7 @@ export default class App extends React.Component {
      */
     quandLaSaisieChange(nouvelleSaisie) {
         console.log('la saisie à changée', nouvelleSaisie)
+        this.setState({texteSaisie : nouvelleSaisie});
     }
 
     /**
