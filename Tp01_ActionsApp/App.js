@@ -36,10 +36,38 @@ export default class App extends React.Component {
         this.setState((prevState) => ({
             actions: [...prevState.actions,
                 {
-                    titre: this.state.texteSaisie,
+                    title: this.state.texteSaisie,
+                    done: false
                 }
             ],
             texteSaisie: ''
+        }))
+    }
+
+    /**
+     * Changer l'état d'une action
+     * @param index index de l'action en question
+     */
+    terminerAction(index) {
+        console.log("Terminer action");
+        const act = {
+            title: this.state.actions[index].title,
+            done: !this.state.actions[index].done
+        }
+
+        this.setState(prevState => ({
+            actions: prevState.actions
+                .map((action, i) => (i === index) ? act : action)
+        }))
+    }
+
+    /**
+     * Supprimer une action
+     * @param index index de l'action en question
+     */
+    supprimerAction(index) {
+        this.setState(prevState => ({
+            actions: prevState.actions.filter((action, i) => (i !== index))
         }))
     }
 
@@ -51,7 +79,9 @@ export default class App extends React.Component {
                 <ScrollView keyboardShouldPersistTaps='always' style={styles.content}>
                     <Entete/>
                     <Saisie texteSaisie={texteSaisie} evtTexteModifie={(titre) => this.quandLaSaisieChange(titre)}/>
-                    <ListeActions liste={actions}/>
+                    <ListeActions liste={actions}
+                                  onTerminer={(index) => this.terminerAction(index)}
+                                  onSupprimer={(index) => this.supprimerAction(index)}/>
                     <BoutonCreer onValider={() => this.validerNouvelleAction(texteSaisie)}/>
                 </ScrollView>
                 <Menu/>
