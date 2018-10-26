@@ -8,12 +8,14 @@ import BoutonAction from './BoutonAction'
  * TODO modifier le code pour afficher le titre de l'action et les boutons associés.
  */
 const UneAction = ({titre}) => (
+
     <View style={styles.conteneurUneAction}>
-        <Text style={styles.texteUneAction}>
+        <Text>
             {titre}
         </Text>
         <View style={styles.boutons}>
-
+            <BoutonAction nom="Terminer" type="termine"/>
+            <BoutonAction nom="Supprimer" type="supprimer"/>
         </View>
     </View>
 )
@@ -45,6 +47,6 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'flex-end',
         alignItems: 'center'
-    },
+    }
 })
 export default UneAction

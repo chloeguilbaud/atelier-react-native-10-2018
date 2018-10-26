@@ -36,7 +36,7 @@ export default class App extends React.Component {
         this.setState((prevState) => ({
             actions: [...prevState.actions,
                 {
-                    titre: this.state.texteSaisie
+                    titre: this.state.texteSaisie,
                 }
             ],
             texteSaisie: ''

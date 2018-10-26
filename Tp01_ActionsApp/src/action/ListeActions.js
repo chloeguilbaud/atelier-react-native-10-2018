@@ -8,13 +8,12 @@ const ListeActions = ({liste}) => {
     return (
         <View>
             {
-                liste.map((val, key) => {
+                liste.map((val) => {
                     return (
                         <UneAction titre={val.titre}></UneAction>
                     )
                 })
             }
-            <Text>Ici prochainement une liste d'actions</Text>
         </View>
     )
 }
