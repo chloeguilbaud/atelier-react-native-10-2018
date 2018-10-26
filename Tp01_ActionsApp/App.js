@@ -14,7 +14,8 @@ export default class App extends React.Component {
     // état global de l'application
     // il y aura probalement d'autres informations à stocker
     state = {
-        texteSaisie: ''
+        texteSaisie: '',
+        actions: []
     }
 
     /**
@@ -30,20 +31,28 @@ export default class App extends React.Component {
     /**
      * Méthode invoquée lors du clic sur le bouton `Valider`.
      */
-    validerNouvelleAction() {
+    validerNouvelleAction(texteSaisie) {
         console.log('Vous avez cliqué sur Valider !')
+        this.setState((prevState) => ({
+            actions: [...prevState.actions,
+                {
+                    titre: this.state.texteSaisie
+                }
+            ],
+            texteSaisie: ''
+        }))
     }
 
     render() {
-        const {texteSaisie} = this.state
+        const {texteSaisie, actions} = this.state
 
         return (
             <View style={styles.conteneur}>
                 <ScrollView keyboardShouldPersistTaps='always' style={styles.content}>
                     <Entete/>
                     <Saisie texteSaisie={texteSaisie} evtTexteModifie={(titre) => this.quandLaSaisieChange(titre)}/>
-                    <ListeActions />
-                    <BoutonCreer onValider={() => this.validerNouvelleAction()}/>
+                    <ListeActions liste={actions}/>
+                    <BoutonCreer onValider={() => this.validerNouvelleAction(texteSaisie)}/>
                 </ScrollView>
                 <Menu/>
             </View>
