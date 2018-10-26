@@ -53,7 +53,7 @@ export default class App extends React.Component {
         const act = {
             title: this.state.actions[index].title,
             done: !this.state.actions[index].done
-        }
+        };
 
         this.setState(prevState => ({
             actions: prevState.actions

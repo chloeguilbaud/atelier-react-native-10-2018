@@ -10,7 +10,10 @@ const ListeActions = ({liste, onTerminer, onSupprimer}) => {
             {
                 liste.map((val, index) => {
                     return (
-                        <UneAction key={index.toString()} onTerminer={() => onTerminer(index)} onSupprimer={() => onSupprimer(index)} title={val.title}></UneAction>
+                        <UneAction key={index.toString()}
+                                   onTerminer={() => onTerminer(index)}
+                                   onSupprimer={() => onSupprimer(index)}
+                                   title={val.title} done={val.done}></UneAction>
                     )
                 })
             }
